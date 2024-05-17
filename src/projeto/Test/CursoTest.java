@@ -1,11 +1,10 @@
-package src.Test;
+package projeto.Test;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.Curso;
-import src.Professor;
-import src.Turma;
+import projeto.Curso;
+import projeto.Professor;
+import projeto.Turma;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,4 +1,4 @@
-package src;
+package projeto;
 
 public class Curso {
     private Turma turma;

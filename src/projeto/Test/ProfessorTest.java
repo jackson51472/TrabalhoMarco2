@@ -1,9 +1,8 @@
-package src.Test;
+package projeto.Test;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import src.Professor;
-import src.Turma;
+import projeto.Professor;
+import projeto.Turma;
 
 class ProfessorTest {
     Professor professor;

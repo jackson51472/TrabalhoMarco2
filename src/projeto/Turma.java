@@ -1,6 +1,9 @@
-package src;
+package projeto;
+
+import java.util.List;
 
 public class Turma {
+    private List<Aluno> alunos;
     private Professor professor;
 
     public Professor getProfessor() {

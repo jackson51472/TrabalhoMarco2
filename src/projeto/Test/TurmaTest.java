@@ -1,12 +1,10 @@
-package src.Test;
+package projeto.Test;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import src.Professor;
-import src.Turma;
-
-import static org.junit.jupiter.api.Assertions.*;
+import projeto.Professor;
+import projeto.Turma;
 
 class TurmaTest {
     Professor professor;
