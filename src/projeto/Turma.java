@@ -7,6 +7,7 @@ public class Turma {
     private List<Aluno> alunos;
     private Professor professor;
     private Disciplina disciplina;
+    private String periodo;
 
     public Turma() {
         this.alunos = new ArrayList<>();
@@ -36,7 +37,26 @@ public class Turma {
         this.disciplina = disciplina;
     }
 
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+
                             //===//===//
+
+    public String getNomeExpecifico(String nome){
+        if (alunos.isEmpty()){
+            return "Sem alunos na Turma";
+        }
+        for (Aluno a : this.alunos) {
+            if (a.getNome().intern().equals(nome))
+                return a.getNome();
+        }
+        return  "Nome não encontrado";
+    }
 
     public String getNomeProfessor(){
 
@@ -74,5 +94,24 @@ public class Turma {
             return "Sem nome disciplina";
         }
         return this.disciplina.getNome();
+    }
+
+    public Object deleteAlunoTurma(String nome){
+        if (alunos.isEmpty()){
+            return "Sem alunos na Turma";
+        }
+        for (Aluno a : this.alunos) {
+            if (a.getNome().intern().equals(nome)){
+                alunos.remove(a);
+                List<String> listaAtualizada = new ArrayList<>();
+
+                for (Aluno j : this.alunos) {
+                    listaAtualizada.add(j.getNome());
+                }
+                return listaAtualizada;
+
+            }
+        }
+        return  "Nome não encontrado";
     }
 }

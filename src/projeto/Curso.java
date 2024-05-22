@@ -76,4 +76,62 @@ public class Curso {
         }
         return turma.get(i).getNomeDisciplinas();
     }
+
+    public String getNomeExpecifico(String nome){
+        if (this.alunos.isEmpty()){
+            return "Sem alunos na Turma";
+        }
+        for (Aluno a : this.alunos) {
+            if (a.getNome().intern().equals(nome))
+                return a.getNome();
+        }
+        return  "Nome não encontrado";
+    }
+    public String getTurmaExpecifica(String turma){
+        if (this.turma.isEmpty()){
+            return "Curso sem Turma";
+        }
+        for (Turma t : this.turma) {
+            if (t.getPeriodo().intern().equals(turma))
+                return t.getPeriodo();
+        }
+        return  "Turma não encontrado";
+    }
+    public Object deleteAlunoCurso(String nome){
+        if (alunos.isEmpty()){
+            return "Sem alunos no Curso";
+        }
+        for (Aluno a : this.alunos) {
+            if (a.getNome().intern().equals(nome)){
+                alunos.remove(a);
+                List<String> listaAtualizada = new ArrayList<>();
+
+                for (Aluno j : this.alunos) {
+                    listaAtualizada.add(j.getNome());
+                }
+                return listaAtualizada;
+
+            }
+        }
+        return  "Nome não encontrado";
+    }
+    public Object deleteTurmaCurso(String nome){
+        if (turma.isEmpty()){
+            return "Sem Turma no Curso";
+        }
+        for (Turma t : this.turma) {
+            if (t.getPeriodo().intern().equals(nome)){
+                turma.remove(t);
+                List<String> listaAtualizada = new ArrayList<>();
+
+                for (Turma j : this.turma) {
+                    listaAtualizada.add(j.getPeriodo());
+                }
+                return listaAtualizada;
+
+            }
+        }
+        return  "Turma não encontrado";
+    }
 }
+

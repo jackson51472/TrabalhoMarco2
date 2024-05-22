@@ -1,5 +1,6 @@
 package projeto.Test;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -140,5 +141,100 @@ class CursoTest {
     @Test
     void deveRetornarSemTurma() {
         assertEquals("Turma não encontrada",curso.getNomeDisciplinas(0));
+    }
+
+    //8
+    @Test
+    void deveRetornarAlunoExpecifico(){
+        Aluno a1 = new Aluno("Marco");
+        aluno.setNome("Teste");
+        curso.adicionarAluno(aluno,a1);
+        Assertions.assertEquals("Teste", curso.getNomeExpecifico("Teste"));
+
+    }
+    @Test
+    void deveRetornarAlunoNaoEncontrado(){
+        aluno.setNome("Teste");
+        curso.adicionarAluno(aluno);
+        Assertions.assertEquals("Nome não encontrado", curso.getNomeExpecifico("Errado"));
+
+    }
+    @Test
+    void deveRetornarTurmaSemAluno(){
+        Assertions.assertEquals("Sem alunos na Turma", curso.getNomeExpecifico("Teste"));
+    }
+
+    // 9
+    @Test
+    void deveRetornarTurmaExpecifico(){
+        Turma t1 = new Turma();
+        t1.setPeriodo("Teste");
+        turma.setPeriodo("5°");
+        curso.adicionarTurma(turma,t1);
+        Assertions.assertEquals("Teste", curso.getTurmaExpecifica("Teste"));
+
+    }
+    @Test
+    void deveRetornarTurmaNaoEncontrado(){
+        turma.setPeriodo("5°");
+        curso.adicionarTurma(turma);
+        Assertions.assertEquals("Turma não encontrado", curso.getTurmaExpecifica("Errado"));
+
+    }
+    @Test
+    void deveRetornarCursoSemTurma3(){
+        Assertions.assertEquals("Curso sem Turma", curso.getTurmaExpecifica("Teste"));
+    }
+
+    //11
+    @Test
+    void deveRetornarTurmaRemovido(){
+        Turma t1 = new Turma();
+        Turma t2 = new Turma();
+        t1.setPeriodo("3°");
+        t2.setPeriodo("4°");
+        turma.setPeriodo("5° Deleta minha turma kkk");
+
+        curso.adicionarTurma(t1,t2,turma);
+        List<String> nomesEsperados = List.of("3°", "4°");  //"6°", "7°"
+
+        Assertions.assertEquals(nomesEsperados, curso.deleteTurmaCurso("5° Deleta minha turma kkk"));
+
+    }
+    @Test
+    void deveRetornarTurmaNaoEncontrado1(){
+        turma.setPeriodo("5°");
+        curso.adicionarTurma(turma);
+
+        Assertions.assertEquals("Turma não encontrado", curso.deleteTurmaCurso("Errado"));
+
+    }
+    @Test
+    void deveRetornarCursoSemTurma1(){
+        Assertions.assertEquals("Sem Turma no Curso", curso.deleteTurmaCurso("Teste"));
+    }
+
+    //12
+    @Test
+    void deveRetornarAlunoRemovido(){
+        Aluno a1 = new Aluno("Teste");
+        Aluno a2 = new Aluno("Barco");
+
+        curso.adicionarAluno(a1,a2,aluno);
+
+        List<String> nomesEsperados = List.of("Teste", "Barco");
+
+        Assertions.assertEquals(nomesEsperados, curso.deleteAlunoCurso("Marco"));
+
+    }
+    @Test
+    void deveRetornarAlunoNaoEncontrado2(){
+        curso.adicionarAluno(aluno);
+        Assertions.assertEquals("Nome não encontrado", curso.deleteAlunoCurso("Errado"));
+
+    }
+    @Test
+    void deveRetornarTurmaSemAluno2(){
+        Assertions.assertEquals("Sem alunos no Curso", curso.deleteAlunoCurso("Teste"));
     }
 }
