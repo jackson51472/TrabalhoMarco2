@@ -65,23 +65,16 @@ class TurmaTest {
 
     //7
     @Test
-    void deveRetornarAlunoExpecifico(){
+    void deveRetornarAlunoEspecifico(){
         Aluno a1 = new Aluno("Marco");
         aluno.setNome("Teste");
         turma.adicionarAlunoTurma(aluno,a1);
-        Assertions.assertEquals("Teste", turma.getNomeExpecifico("Teste"));
-
-    }
-    @Test
-    void deveRetornarAlunoNaoEncontrado(){
-        aluno.setNome("Teste");
-        turma.adicionarAlunoTurma(aluno);
-        Assertions.assertEquals("Nome não encontrado", turma.getNomeExpecifico("Errado"));
+        Assertions.assertEquals(a1, turma.getNomeEspecifico(a1));
 
     }
     @Test
     void deveRetornarTurmaSemAluno(){
-        Assertions.assertEquals("Sem alunos na Turma", turma.getNomeExpecifico("Teste"));
+        Assertions.assertEquals("Sem alunos na Turma", turma.getNomeEspecifico(aluno));
     }
 
     //10
@@ -94,18 +87,11 @@ class TurmaTest {
 
         List<String> nomesEsperados = List.of("Teste", "Barco");
 
-        Assertions.assertEquals(nomesEsperados, turma.deleteAlunoTurma("Marco"));
-
+        Assertions.assertEquals(nomesEsperados, turma.deleteAlunoTurma(aluno));
     }
-    @Test
-    void deveRetornarAlunoNaoEncontrado2(){
-        aluno.setNome("Teste");
-        turma.adicionarAlunoTurma(aluno);
-        Assertions.assertEquals("Nome não encontrado", turma.deleteAlunoTurma("Errado"));
 
-    }
     @Test
     void deveRetornarTurmaSemAluno2(){
-        Assertions.assertEquals("Sem alunos na Turma", turma.deleteAlunoTurma("Teste"));
+        Assertions.assertEquals("Sem alunos na Turma", turma.deleteAlunoTurma(aluno));
     }
 }

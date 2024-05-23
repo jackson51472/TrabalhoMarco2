@@ -7,19 +7,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class Curso {
-    private List<Turma> turma;
+    private List<Turma> turmas;
     private ArrayList<Aluno> alunos;
 
     public Curso() {
         this.alunos = new ArrayList<>();
-        this.turma = new ArrayList<>();
+        this.turmas = new ArrayList<>();
     }
 
-    public List<Turma> getTurma() {
-        return turma;
+    public List<Turma> getTurmas() {
+        return turmas;
     }
-    public void setTurma(List<Turma> turma) {
-        this.turma = turma;
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
     }
     public ArrayList<Aluno> getAlunos() {
         return alunos;
@@ -29,16 +29,26 @@ public class Curso {
         this.alunos = alunos;
     }
 
-    public String getNomeProfessor(Integer t){
-        if (this.turma.isEmpty()){
-            throw new NullPointerException("Curso não tem turma");
+
+                        //===//===//
+
+    public Object getNomeProfessor(){
+
+
+        List<String> listaProfessores= new ArrayList<String>();
+
+        for (Turma j : this.turmas) {
+
+            listaProfessores.add(j.getNomeProfessor());
+
         }
-        return turma.get(t).getNomeProfessor();
+
+        return listaProfessores;
     }
 
     public void adicionarTurma(Turma... turmas) {
         for (Turma t : turmas) {
-            this.turma.add(t);
+            this.turmas.add(t);
         }
     }
 
@@ -48,13 +58,18 @@ public class Curso {
         }
     }
 
-    public List<String> getNomeAlunosTurma(Integer t){
+    public List<String> getNomeAlunosTurma(){
 
-        if (this.turma.isEmpty()){
+        if (this.turmas.isEmpty()){
             throw new NullPointerException("Curso não tem turma");
         }
+        List<String> listaAlunos = new ArrayList<String>();
 
-        return this.turma.get(t).getNomeAlunos();
+        for (Turma j : this.turmas) {
+
+            listaAlunos.addAll(j.getNomeAlunos());
+        }
+        return listaAlunos;
     }
 
     public List<String> getNomeAlunos(){
@@ -70,68 +85,76 @@ public class Curso {
         return nomes;
     }
 
-    public String getNomeDisciplinas(Integer i){
-        if (i >= this.turma.size()){
-            return "Turma não encontrada";
+    public List<String> getNomeDisciplinas(){
+        if (this.turmas.isEmpty()){
+            throw new NullPointerException("Curso sem Aluno");
         }
-        return turma.get(i).getNomeDisciplinas();
+        List<String> listaDiciplinas = new ArrayList<>();
+        for (Turma t : this.turmas) {
+
+            listaDiciplinas.add(t.getNomeDisciplinas());
+
+        }
+        return listaDiciplinas;
     }
 
-    public String getNomeExpecifico(String nome){
+    public Object getAlunoEspecifico(Aluno aluno){
         if (this.alunos.isEmpty()){
             return "Sem alunos na Turma";
         }
         for (Aluno a : this.alunos) {
-            if (a.getNome().intern().equals(nome))
-                return a.getNome();
+
+            if ( a.equals(aluno)){
+                return a;
+            }
         }
-        return  "Nome não encontrado";
+        return null;
     }
-    public String getTurmaExpecifica(String turma){
-        if (this.turma.isEmpty()){
-            return "Curso sem Turma";
+
+    public Object getTurmaExpecifica(Turma turma){
+        if (this.turmas.isEmpty()){
+            return "Sem Turma no Curso";
         }
-        for (Turma t : this.turma) {
-            if (t.getPeriodo().intern().equals(turma))
-                return t.getPeriodo();
+
+        for (Turma t : this.turmas) {
+            if ( t.equals(turma)){
+                return t;
+            }
         }
-        return  "Turma não encontrado";
+
+        return null;
     }
-    public Object deleteAlunoCurso(String nome){
+
+    public Object deleteAlunoCurso(Aluno aluno){
         if (alunos.isEmpty()){
             return "Sem alunos no Curso";
         }
-        for (Aluno a : this.alunos) {
-            if (a.getNome().intern().equals(nome)){
-                alunos.remove(a);
-                List<String> listaAtualizada = new ArrayList<>();
 
-                for (Aluno j : this.alunos) {
-                    listaAtualizada.add(j.getNome());
-                }
-                return listaAtualizada;
+        this.alunos.remove(aluno);
+        List<String> listaAtualizada = new ArrayList<>();
 
-            }
+        for (Aluno j : this.alunos) {
+            listaAtualizada.add(j.getNome());
         }
-        return  "Nome não encontrado";
+        return listaAtualizada;
+
     }
-    public Object deleteTurmaCurso(String nome){
-        if (turma.isEmpty()){
+
+    public Object deleteTurmaCurso(Turma turma){
+        if (this.turmas.isEmpty()){
             return "Sem Turma no Curso";
         }
-        for (Turma t : this.turma) {
-            if (t.getPeriodo().intern().equals(nome)){
-                turma.remove(t);
-                List<String> listaAtualizada = new ArrayList<>();
+        this.turmas.remove(turma);
 
-                for (Turma j : this.turma) {
-                    listaAtualizada.add(j.getPeriodo());
-                }
-                return listaAtualizada;
+        List<String> listaAtualizada = new ArrayList<>();
 
-            }
+        for (Turma j : this.turmas) {
+            listaAtualizada.add(j.getPeriodo());
         }
-        return  "Turma não encontrado";
+        return listaAtualizada;
+
+
+
     }
 }
 

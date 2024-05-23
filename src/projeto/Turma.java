@@ -47,15 +47,17 @@ public class Turma {
 
                             //===//===//
 
-    public String getNomeExpecifico(String nome){
+    public Object getNomeEspecifico(Aluno aluno){
         if (alunos.isEmpty()){
             return "Sem alunos na Turma";
         }
         for (Aluno a : this.alunos) {
-            if (a.getNome().intern().equals(nome))
-                return a.getNome();
+
+            if ( a.equals(aluno)){
+                return a;
+            }
         }
-        return  "Nome não encontrado";
+        return  null;
     }
 
     public String getNomeProfessor(){
@@ -73,10 +75,6 @@ public class Turma {
     }
 
     public List<String> getNomeAlunos(){
-        if (this.alunos.isEmpty()){
-            throw new NullPointerException("A Turma esta sem alunos");
-        }
-
         List<String> nomes = new ArrayList<>();
 
         for (int j = 0; j < this.alunos.size(); j++) {
@@ -96,22 +94,22 @@ public class Turma {
         return this.disciplina.getNome();
     }
 
-    public Object deleteAlunoTurma(String nome){
-        if (alunos.isEmpty()){
+    public Object deleteAlunoTurma(Aluno aluno) {
+        if (alunos.isEmpty()) {
             return "Sem alunos na Turma";
         }
-        for (Aluno a : this.alunos) {
-            if (a.getNome().intern().equals(nome)){
-                alunos.remove(a);
-                List<String> listaAtualizada = new ArrayList<>();
+        alunos.remove(aluno);
 
-                for (Aluno j : this.alunos) {
-                    listaAtualizada.add(j.getNome());
-                }
-                return listaAtualizada;
+        List<String> listaAtualizada = new ArrayList<String>();
 
-            }
+        for (Aluno j : this.alunos) {
+
+            listaAtualizada.add(j.getNome());
+
         }
-        return  "Nome não encontrado";
+        return listaAtualizada;
     }
 }
+
+
+
